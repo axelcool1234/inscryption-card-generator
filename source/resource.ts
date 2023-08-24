@@ -37,7 +37,8 @@ class SingleResource implements Resource {
 
     if (missingResources.length) {
       for (const { category, id, path } of missingResources) {
-        console.error(`ERROR: ${category}:${id} '${path}' does not exist`)
+        const fullpath = join(this.#path, path)
+        console.error(`ERROR: ${category}:${id} '${fullpath}' does not exist`)
       }
 
       throw 'ERROR: Missing resource(s)'

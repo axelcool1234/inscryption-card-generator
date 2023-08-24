@@ -40,6 +40,7 @@ function bufferFromCommandBuilder(im: ImageMagickCommandBuilder, input?: Buffer,
       resolve(buffer)
     })
     process.stderr.on('data', (data: Buffer) => {
+      console.error('ImageMagick Error:', data.toString());
       reject(data.toString())
     })
     process.stdin.end(input)
