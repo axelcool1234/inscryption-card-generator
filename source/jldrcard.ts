@@ -632,11 +632,11 @@ function convertJldrCard(jsonCard: JldrCreature): Card {
   } else if (jsonCard.energyCost != 0) {
     card.cost = { type: 'energy', amount: jsonCard.energyCost }
   } else if (jsonCard.gemsCost.length) {
-    const gemConverter = (gem: Gem): 'blue' | 'green' | 'orange' => {
+    const gemConverter = (gem: Gem): 'orange1' | 'green1' | 'blue1' | 'orange2' | 'green2' | 'blue2' | 'orange3' | 'green3' | 'blue3' => {
       switch (gem) {
-        case 'Blue': return 'blue'
-        case 'Green': return 'green'
-        case 'Orange': return 'orange'
+        case 'Blue': return 'blue1'
+        case 'Green': return 'green1'
+        case 'Orange': return 'orange1'
       }
     }
 
@@ -1049,9 +1049,15 @@ export function convert(card: Card, id: string): Partial<JldrCreature> {
       case 'gem': {
         out.gemsCost = card.cost.gems.map((gem): 'Orange' | 'Green' | 'Blue' => {
           switch (gem) {
-            case 'blue': return 'Blue'
-            case 'green': return 'Green'
-            case 'orange': return 'Orange'
+            case 'blue1': return 'Blue'
+            case 'green1': return 'Green'
+            case 'orange1': return 'Orange'
+            case 'blue2': return 'Blue'
+            case 'green2': return 'Green'
+            case 'orange2': return 'Orange'
+            case 'blue3': return 'Blue'
+            case 'green3': return 'Green'
+            case 'orange3': return 'Orange'
           }
         })
       }

@@ -41,7 +41,7 @@ const ApiCard = RRecord({
   bloodCost: Number,
   boneCost: Number,
   energyCost: Number,
-  gemCost: RRecord({ orange: Boolean, green: Boolean, blue: Boolean }).optional(),
+  gemCost: RRecord({ orange1: Boolean, green1: Boolean, blue1: Boolean, orange2: Boolean, green2: Boolean, blue2: Boolean, orange3: Boolean, green3: Boolean, blue3: Boolean }).optional(),
   sigils: Array(Sigil),
   decals: Array(Union(Literal('blood'), Literal('smoke'), Literal('paint'))),
   temple: Temple,
@@ -119,16 +119,34 @@ function convertApiDataToCard(input: ApiCard): Card {
   } else if (input.energyCost > 0) {
     cost = { type: 'energy', amount: input.energyCost }
   } else if (input.gemCost) {
-    const gems: ('orange' | 'green' | 'blue')[] = []
+    const gems: ('orange1' | 'green1' | 'blue1' | 'orange2' | 'green2' | 'blue2' | 'orange3' | 'green3' | 'blue3')[] = []
 
-    if (input.gemCost.orange) {
-      gems.push('orange' as const)
+    if (input.gemCost.orange1) {
+      gems.push('orange1' as const)
     }
-    if (input.gemCost.green) {
-      gems.push('green' as const)
+    if (input.gemCost.green1) {
+      gems.push('green1' as const)
     }
-    if (input.gemCost.blue) {
-      gems.push('blue' as const)
+    if (input.gemCost.blue1) {
+      gems.push('blue1' as const)
+    }
+    if (input.gemCost.orange2) {
+      gems.push('orange2' as const)
+    }
+    if (input.gemCost.green2) {
+      gems.push('green2' as const)
+    }
+    if (input.gemCost.blue2) {
+      gems.push('blue2' as const)
+    }
+    if (input.gemCost.orange3) {
+      gems.push('orange3' as const)
+    }
+    if (input.gemCost.green3) {
+      gems.push('green3' as const)
+    }
+    if (input.gemCost.blue3) {
+      gems.push('blue3' as const)
     }
 
     cost = { type: 'gem', gems: gems }

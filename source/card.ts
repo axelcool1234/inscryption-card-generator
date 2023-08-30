@@ -438,7 +438,7 @@ const EnergyCost = Record({
 })
 const GemCost = Record({
   type: Literal('gem'),
-  gems: Array(Union(Literal('blue'), Literal('green'), Literal('orange')))
+  gems: Array(Union(Literal('blue1'), Literal('green1'), Literal('orange1'), Literal('blue2'), Literal('green2'), Literal('orange2'), Literal('blue3'), Literal('green3'), Literal('orange3')))
 })
 const Cost = Union(BloodCost, BoneCost, EnergyCost, GemCost)
 

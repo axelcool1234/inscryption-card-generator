@@ -1,33 +1,33 @@
-export const getGemCostResourceId = (gems: ('orange' | 'green' | 'blue')[]): 'mox-b' | 'mox-bg' | 'mox-g' | 'mox-go' | 'mox-o' | 'mox-ob' | 'mox-ogb' | undefined => {
-  let ogb = 0b000
+export const getGemCostResourceId = (gems: ('orange1' | 'green1' | 'blue1' | 'orange2' | 'green2' | 'blue2' | 'orange3' | 'green3' | 'blue3')[]) => {
+  const level1: string[] = [];
+  const level2: string[] = [];
+  const level3: string[] = [];
+
   for (const gem of gems) {
-    const costMap = { 'orange': 0b100, 'green': 0b010, 'blue': 0b001 }
-    ogb |= costMap[gem]
-  }
-
-  switch (ogb) {
-    case 0b001: {
-      return 'mox-b'
+    if (gem.includes('1')) {
+      prioritizeAndPush(gem.replace('1', ''), level1);
     }
-    case 0b010: {
-      return 'mox-g'
+    if (gem.includes('2')) {
+      prioritizeAndPush(gem.replace('2', ''), level2);
     }
-    case 0b100: {
-      return 'mox-o'
-    }
-    case 0b011: {
-      return 'mox-bg'
-    }
-    case 0b101: {
-      return 'mox-ob'
-    }
-    case 0b110: {
-      return 'mox-go'
-    }
-    case 0b111: {
-      return 'mox-ogb'
+    if (gem.includes('3')) {
+      prioritizeAndPush(gem.replace('3', ''), level3);
     }
   }
 
-  return undefined
-}
+  const combo = (level1[0] || '').charAt(0) + (level2[0] || '').charAt(0) + (level3[0] || '').charAt(0);
+  const combination = combo.split('').filter(level => level !== '');
+  const resourceId = combination.length > 0 ? `mox-${combination.join('')}` : undefined;
+  console.log(resourceId);
+  return resourceId;
+};
+
+const prioritizeAndPush = (color: string, levelArray: string[]) => {
+  const colorPriority = ['orange', 'green', 'blue'];
+  const existingIndex = colorPriority.indexOf(levelArray[0]);
+  const newIndex = colorPriority.indexOf(color);
+
+  if (newIndex !== -1 && (existingIndex === -1 || newIndex < existingIndex)) {
+    levelArray.unshift(color);
+  }
+};

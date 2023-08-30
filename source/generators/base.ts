@@ -26,6 +26,7 @@ abstract class BaseCardGenerator<T extends Record<string, unknown>> implements C
 }
 
 function bufferFromCommandBuilder(im: ImageMagickCommandBuilder, input?: Buffer, filetype = 'PNG'): Promise<Buffer> {
+  console.log([...im.parts(), filetype ? `${filetype}:-` : '-'].join(' '))
   return new Promise<Buffer>((resolve, reject) => {
     const process = spawn('convert', [...im.parts(), filetype ? `${filetype}:-` : '-'], { stdio: 'pipe' })
     console.log('spawned a process', process.pid)
@@ -48,6 +49,7 @@ function bufferFromCommandBuilder(im: ImageMagickCommandBuilder, input?: Buffer,
 }
 
 function bufferFromCommandBuilderFds(im: ImageMagickCommandBuilder, fds: Fds, filetype = 'PNG'): Promise<Buffer> {
+  console.log([...im.parts(), filetype ? `${filetype}:-` : '-'].join(' '))
   return new Promise<Buffer>((resolve, reject) => {
     const process = spawn('convert', [...im.parts(), filetype ? `${filetype}:-` : '-'], { stdio: ['pipe', 'pipe', 'pipe', ...(new Array(fds.fds().length).fill('pipe'))] })
     console.log('spawned a process', process.pid)
