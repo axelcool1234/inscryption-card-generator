@@ -53,7 +53,7 @@ class LeshyCardGenerator extends BaseCardGenerator<Options> {
       temple = '';
     }    
     const complexType = temple+type;
-    
+
     // load card
     im.resource(this.resource.get('card', complexType))
 
@@ -558,6 +558,12 @@ const act1ResourceMap = {
     'blood_2': 'costs/blood2.png',
     'blood_3': 'costs/blood3.png',
     'blood_4': 'costs/blood4.png',
+    'blood_5': 'costs/blood5.png',
+    'blood_6': 'costs/blood6.png',
+    'blood_7': 'costs/blood7.png',
+    'blood_8': 'costs/blood8.png',
+    'blood_9': 'costs/blood9.png',
+    'blood_10': 'costs/blood10.png',
     'bone_1': 'costs/bone1.png',
     'bone_2': 'costs/bone2.png',
     'bone_3': 'costs/bone3.png',
