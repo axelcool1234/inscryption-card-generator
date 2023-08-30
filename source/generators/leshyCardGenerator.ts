@@ -153,7 +153,7 @@ class LeshyCardGenerator extends BaseCardGenerator<Options> {
       const healthHeight = 215
       im.parens(
         IM()
-          .pointsize()
+          .pointsize(209)
           .size(healthWidth, healthHeight)
           .label(card.health)
           .gravity('East')
@@ -182,7 +182,7 @@ class LeshyCardGenerator extends BaseCardGenerator<Options> {
 
         im.parens(
           IM()
-            .pointsize()
+            .pointsize(209)
             .size(w, h)
             .gravity('West')
             .label(card.power)
@@ -242,8 +242,8 @@ class LeshyCardGenerator extends BaseCardGenerator<Options> {
       const escapedName = card.name.replace(/[\\']/g, '')
 
       // default for english
-      let size = { w: 570, h: 135 }
-      let position = { x: 0, y: 28 }
+      let size = { w: 570, h: 155 }
+      let position = { x: 0, y: 18 }
 
       const locale = this.options.locale
       if (locale === 'ko') {
