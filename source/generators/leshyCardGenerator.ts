@@ -4,6 +4,7 @@ import IM from '../im'
 import { Fds } from '../im/fds'
 import { getGemCostResourceId } from '../helpers'
 import { SingleResource } from '../resource'
+import { PassThrough } from 'stream'
 
 export { LeshyCardGenerator, act1Resource }
 
@@ -32,6 +33,7 @@ class LeshyCardGenerator extends BaseCardGenerator<Options> {
       .filter('Box')
 
     let type: 'common' | 'rare' | 'terrain' = 'common'
+    let temple: 'mag' | 'grim' | 'p03' | ''
 
     if (card.flags.terrain) {
       type = 'terrain'
@@ -41,8 +43,19 @@ class LeshyCardGenerator extends BaseCardGenerator<Options> {
       type = 'rare'
     }
 
+    if (card.temple === 'wizard') {
+      temple = 'mag';
+    } else if (card.temple === 'undead') {
+      temple = 'grim';
+    } else if (card.temple === 'tech') {
+      temple = 'p03';
+    } else {
+      temple = '';
+    }    
+    const complexType = temple+type;
+    
     // load card
-    im.resource(this.resource.get('card', type))
+    im.resource(this.resource.get('card', complexType))
 
     if (card.portrait?.type) {
       switch (card.portrait?.type) {
@@ -119,7 +132,7 @@ class LeshyCardGenerator extends BaseCardGenerator<Options> {
     if (card.cost) {
       const costType = card.cost.type
       let costPath: string | undefined = undefined
-      if (costType === 'blood' || costType === 'bone') {
+      if (costType === 'blood' || costType === 'bone' || costType === 'energy') {
         const { type, amount } = card.cost
         costPath = this.resource.get('cost', `${type}_${amount}`)
       } else if (costType === 'gem') {
@@ -460,6 +473,15 @@ const act1ResourceMap = {
     'common': 'cards/common.png',
     'rare': 'cards/rare.png',
     'terrain': 'cards/terrain.png',
+    'magcommon': 'cards/magcommon.png',
+    'magrare': 'cards/magrare.png',
+    'magterrain': 'cards/magterrain.png',
+    'grimcommon': 'cards/grimcommon.png',
+    'grimrare': 'cards/grimrare.png',
+    'grimterrain': 'cards/grimterrain.png',
+    'p03common': 'cards/p03common.png',
+    'p03grimrare': 'cards/p03rare.png',
+    'p03grimterrain': 'cards/p03terrain.png',
   },
   'cardback': {
     'bee': 'cardbacks/bee.png',
@@ -473,6 +495,15 @@ const act1ResourceMap = {
     'rare': 'cardbackgrounds/rare.png',
     'special': 'cardbackgrounds/special.png',
     'terrain': 'cardbackgrounds/terrain.png',
+    'magcommon': 'cardbackgrounds/magcommon.png',
+    'magrare': 'cardbackgrounds/magrare.png',
+    'magterrain': 'cardbackgrounds/magterrain.png',
+    'grimcommon': 'cardbackgrounds/grimcommon.png',
+    'grimrare': 'cardbackgrounds/grimrare.png',
+    'grimterrain': 'cardbackgrounds/grimterrain.png',
+    'p03common': 'cardbackgrounds/p03common.png',
+    'p03grimrare': 'cardbackgrounds/p03rare.png',
+    'p03grimterrain': 'cardbackgrounds/p03terrain.png',
   },
   'cardboon': {
     'doubledraw': 'cardboons/doubledraw.png',
@@ -537,6 +568,12 @@ const act1ResourceMap = {
     'bone_8': 'costs/bone8.png',
     'bone_9': 'costs/bone9.png',
     'bone_10': 'costs/bone10.png',
+    'energy_1': 'costs/energy-1.png',
+    'energy_2': 'costs/energy-2.png',
+    'energy_3': 'costs/energy-3.png',
+    'energy_4': 'costs/energy-4.png',
+    'energy_5': 'costs/energy-5.png',
+    'energy_6': 'costs/energy-6.png',
     'mox-b': 'costs/mox-b.png',
     'mox-g': 'costs/mox-g.png',
     'mox-o': 'costs/mox-o.png',
