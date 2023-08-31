@@ -56,6 +56,7 @@ const CreatureId = Union(
   Literal('BlueMage'),
   Literal('BlueMage_Fused'),
   Literal('BlueMage_Talking'),
+  Literal('BrokenEgg'),
   Literal('BoltHound'),
   Literal('BombMaiden'),
   Literal('Bombbot'),
@@ -126,6 +127,7 @@ const CreatureId = Union(
   Literal('GhostShip'),
   Literal('GiftBot'),
   Literal('Goat'),
+  Literal('GoatSexy'),
   Literal('GoldNugget'),
   Literal('Gravedigger'),
   Literal('Gravedigger_Fused'),
@@ -142,6 +144,7 @@ const CreatureId = Union(
   Literal('Ijiraq_UnlockScreen'),
   Literal('Insectodrone'),
   Literal('JerseyDevil'),
+  Literal('JerseyDevilFlying'),
   Literal('JuniorSage'),
   Literal('Kingfisher'),
   Literal('Kraken'),
@@ -362,6 +365,7 @@ const SpecialAbility = Union(
   Literal('GreenMage'),
   Literal('Shapeshifter'),
   Literal('JerseyDevil'),
+  Literal('JerseyDevilFlying'),
   Literal('Lammergeier'),
   Literal('PackMule'),
   Literal('Ouroboros'),
@@ -805,6 +809,7 @@ function convertJldrCard(jsonCard: JldrCreature): Card {
     case 'BlueMage': card.portrait = { type: 'creature', id: 'bluemage' }; break
     case 'BlueMage_Fused': card.portrait = { type: 'creature', id: 'bluemage_fused' }; break
     case 'BlueMage_Talking': card.portrait = { type: 'creature', id: 'bluemage_talking' }; break
+    case 'BrokenEgg': card.portrait = { type: 'creature', id: 'brokenegg' }; break
     case 'BoltHound': card.portrait = { type: 'creature', id: 'bolthound' }; break
     case 'BombMaiden': card.portrait = { type: 'creature', id: 'bombmaiden' }; break
     case 'Bombbot': card.portrait = { type: 'creature', id: 'bombbot' }; break
@@ -875,6 +880,7 @@ function convertJldrCard(jsonCard: JldrCreature): Card {
     case 'GhostShip': card.portrait = { type: 'creature', id: 'ghostship' }; break
     case 'GiftBot': card.portrait = { type: 'creature', id: 'giftbot' }; break
     case 'Goat': card.portrait = { type: 'creature', id: 'goat' }; break
+    case 'GoatSexy': card.portrait = { type: 'creature', id: 'goat_sexy' }; break
     case 'GoldNugget': card.portrait = { type: 'creature', id: 'goldnugget' }; break
     case 'Gravedigger': card.portrait = { type: 'creature', id: 'gravedigger' }; break
     case 'Gravedigger_Fused': card.portrait = { type: 'creature', id: 'gravedigger_fused' }; break
@@ -891,6 +897,7 @@ function convertJldrCard(jsonCard: JldrCreature): Card {
     case 'Ijiraq_UnlockScreen': card.portrait = { type: 'creature', id: 'ijiraq_unlockscreen' }; break
     case 'Insectodrone': card.portrait = { type: 'creature', id: 'insectodrone' }; break
     case 'JerseyDevil': card.portrait = { type: 'creature', id: 'jerseydevil' }; break
+    case 'JerseyDevilFlying': card.portrait = { type: 'creature', id: 'jerseydevil_flying' }; break
     case 'JuniorSage': card.portrait = { type: 'creature', id: 'juniorsage' }; break
     case 'Kingfisher': card.portrait = { type: 'creature', id: 'kingfisher' }; break
     case 'Kraken': card.portrait = { type: 'creature', id: 'kraken' }; break
@@ -1313,6 +1320,7 @@ export function convert(card: Card, id: string): Partial<JldrCreature> {
   if (card.flags.enhanced) {
     // ! emission
     // if res.has('creature', id) => out.emissionTexture = id + '_emission.png'
+    out.decals.push(id + '_emission.png')
   }
 
   if (card.flags.blood1) {
@@ -1327,7 +1335,6 @@ export function convert(card: Card, id: string): Partial<JldrCreature> {
   if (card.flags.blood4) {
     out.decals.push(id + '_blood4.png')
   }
-
 
   if (card.flags.paint1) {
     out.decals.push(id + '_paint1.png')

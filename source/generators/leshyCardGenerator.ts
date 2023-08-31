@@ -307,6 +307,27 @@ class LeshyCardGenerator extends BaseCardGenerator<Options> {
         .compose('SrcOver')
     }
 
+    // Temporarily moved here. Move back to next comment later.
+    if (card.flags.enhanced && card.portrait?.type === 'resource') {
+      console.log(card.portrait.resourceId)
+      if (this.resource.has('emission', card.portrait.resourceId)) {
+        const emissionPath = this.resource.get('emission', card.portrait.resourceId)
+
+        for (const i of [false, true]) {
+          const emission = IM(emissionPath)
+            .command('-fill', 'rgb(161,247,186)', '-colorize', '100').resizeExt(g => g.scale(scale * 100))
+            .gravity('Center')
+            .geometry(3, -15 * scale)
+
+          if (i === true) {
+            emission.command('-blur', '0x10')
+          }
+
+          im.parens(emission).composite()
+        }
+      }
+    }
+
     if (card.flags.golden) {
       im.parens(
         IM().command('-clone', '0', '-fill', 'rgb(255,128,0)', '-colorize', '75')
@@ -414,24 +435,7 @@ class LeshyCardGenerator extends BaseCardGenerator<Options> {
         .composite()
     }
 
-    if (card.flags.enhanced && card.portrait?.type === 'creature') {
-      if (this.resource.has('emission', card.portrait.id)) {
-        const emissionPath = this.resource.get('emission', card.portrait.id)
-
-        for (const i of [false, true]) {
-          const emission = IM(emissionPath)
-            .command('-fill', 'rgb(161,247,186)', '-colorize', '100').resizeExt(g => g.scale(scale * 100))
-            .gravity('Center')
-            .geometry(3, -15 * scale)
-
-          if (i === true) {
-            emission.command('-blur', '0x10')
-          }
-
-          im.parens(emission).composite()
-        }
-      }
-    }
+    // Move back here!
 
     return bufferFromCommandBuilderFds(im, fds)
   }
@@ -896,8 +900,8 @@ const act1ResourceMap = {
     'hydraegg_light': 'portraits/leshy/hydraegg_light.png',
     'ijiraq': 'portraits/leshy/ijiraq.png',
     'insect_tail': 'portraits/leshy/insect_tail.png',
-    'jerseydevil_flying': 'portraits/leshy/jerseydevil.png',
-    'jerseydevil': 'portraits/leshy/jerseydevil_sleeping.png',
+    'jerseydevil': 'portraits/leshy/jerseydevil.png',
+    'jerseydevil_flying': 'portraits/leshy/jerseydevil_flying.png',
     'kingfisher': 'portraits/leshy/kingfisher.png',
     'kraken': 'portraits/leshy/kraken.png',
     'lammergeier': 'portraits/leshy/lammergeier.png',
