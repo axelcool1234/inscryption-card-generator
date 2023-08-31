@@ -563,9 +563,23 @@ function convertJldrCard(jsonCard: JldrCreature): Card {
       redEmission: false,
       fused: false,
       smoke: false,
-      paint: false,
-      blood: false,
+      blood1: false,
+      blood2: false,
+      blood3: false,
+      blood4: false,
+      paint1: false,
+      paint2: false,
+      paint3: false,
+      snelk1: false,
+      snelk2: false,
+      snelk3: false,
+      snelk4: false,
+      snelk5: false,
+      snelk6: false,
+      stitches: false,
+      fungus: false,
       hidePowerAndHealth: false,
+      snelk: false,
     },
   }
 
@@ -582,7 +596,10 @@ function convertJldrCard(jsonCard: JldrCreature): Card {
   card.flags.rare = jsonCard.metaCategories.includes('Rare') || jsonCard.appearanceBehaviour.includes('RareCardBackground')
   card.flags.terrain = jsonCard.traits.includes('Terrain') || jsonCard.appearanceBehaviour.includes('TerrainBackground')
   card.flags.terrainLayout = jsonCard.appearanceBehaviour.includes('TerrainLayout')
-  card.flags.blood = jsonCard.appearanceBehaviour.includes('AlternatingBloodDecal')
+  card.flags.blood1 = jsonCard.appearanceBehaviour.includes('AlternatingBloodDecal')
+  card.flags.blood2 = jsonCard.appearanceBehaviour.includes('AlternatingBloodDecal')
+  card.flags.blood3 = jsonCard.appearanceBehaviour.includes('AlternatingBloodDecal')
+  card.flags.blood4 = jsonCard.appearanceBehaviour.includes('AlternatingBloodDecal')
   card.flags.smoke = !!jsonCard.name.match(/^Smoke/)
 
   // if (jsonCard.appearanceBehaviours.includes('AddSnelkDecals')) {
@@ -1150,7 +1167,7 @@ export function convert(card: Card, id: string): Partial<JldrCreature> {
     }
   }
 
-  if (card.flags.blood) {
+  if (card.flags.blood1 || card.flags.blood2 || card.flags.blood3 || card.flags.blood4) {
     out.appearanceBehaviour.push('AlternatingBloodDecal')
   }
 
@@ -1297,16 +1314,58 @@ export function convert(card: Card, id: string): Partial<JldrCreature> {
     // if res.has('creature', id) => out.emissionTexture = id + '_emission.png'
   }
 
-  if (card.flags.paint) {
-    out.decals.push(id + '_paint.png')
+  if (card.flags.blood1) {
+    out.decals.push(id + '_blood1.png')
+  }
+  if (card.flags.blood2) {
+    out.decals.push(id + '_blood2.png')
+  }
+  if (card.flags.blood3) {
+    out.decals.push(id + '_blood3.png')
+  }
+  if (card.flags.blood4) {
+    out.decals.push(id + '_blood4.png')
   }
 
-  if (card.flags.smoke) {
-    out.decals.push(id + '_smoke.png')
+
+  if (card.flags.paint1) {
+    out.decals.push(id + '_paint1.png')
   }
 
-  if (card.flags.squid) {
-    out.titleGraphic = id + '_squid.png'
+  if (card.flags.paint2) {
+    out.decals.push(id + '_paint2.png')
+  }
+
+  if (card.flags.paint3) {
+    out.decals.push(id + '_paint3.png')
+  }
+
+  if (card.flags.snelk1) {
+    out.decals.push(id + '_snelk1.png')
+  }
+
+  if (card.flags.snelk2) {
+    out.titleGraphic = id + '_snelk2.png'
+  }
+
+  if (card.flags.snelk3) {
+    out.titleGraphic = id + '_snelk3.png'
+  }
+
+  if (card.flags.snelk4) {
+    out.titleGraphic = id + '_snelk4.png'
+  }
+
+  if (card.flags.snelk5) {
+    out.titleGraphic = id + '_snelk5.png'
+  }
+
+  if (card.flags.snelk6) {
+    out.titleGraphic = id + '_snelk6.png'
+  }
+
+  if (card.flags.stitches) {
+    out.titleGraphic = id + '_stitches.png'
   }
 
   // remove empty arrays
@@ -1347,8 +1406,16 @@ export async function createResourcesForCard(folderAbsolute: string, card: Card,
     fs.copyFileSync(resource.get('misc', 'squid_title'), path.join(folderAbsolute, id + '_squid.png'))
   }
 
-  if (card.flags.paint) {
-    fs.copyFileSync(resource.get('decal', 'paint'), path.join(folderAbsolute, id + '_paint.png'))
+  if (card.flags.paint1) {
+    fs.copyFileSync(resource.get('decal', 'paint1'), path.join(folderAbsolute, id + '_paint1.png'))
+  }
+
+  if (card.flags.paint2) {
+    fs.copyFileSync(resource.get('decal', 'paint2'), path.join(folderAbsolute, id + '_paint2.png'))
+  }
+
+  if (card.flags.paint3) {
+    fs.copyFileSync(resource.get('decal', 'paint3'), path.join(folderAbsolute, id + '_paint3.png'))
   }
 
   if (card.flags.fused) {
