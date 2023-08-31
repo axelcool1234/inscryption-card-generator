@@ -331,6 +331,10 @@ class LeshyCardGenerator extends BaseCardGenerator<Options> {
 
     const decals: string[] = []
     // special case, as combined cards have multiple decals
+    if (card.flags.child) {
+      decals.push('child')
+    }
+
     if (card.flags.fused) {
       decals.push('fungus', 'blood2', 'stitches')
     }

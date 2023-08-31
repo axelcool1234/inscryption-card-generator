@@ -478,6 +478,7 @@ const Card = Record({
     snelk6: Boolean,
     stitches: Boolean,
     fungus: Boolean,
+    child: Boolean,
     hidePowerAndHealth: Boolean,
     snelk: Boolean,
   }),

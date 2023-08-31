@@ -578,6 +578,7 @@ function convertJldrCard(jsonCard: JldrCreature): Card {
       snelk6: false,
       stitches: false,
       fungus: false,
+      child: false,
       hidePowerAndHealth: false,
       snelk: false,
     },

@@ -46,7 +46,7 @@ const ApiCard = RRecord({
   decals: Array(Union(Literal('blood1'), Literal('blood2'), Literal('blood3'), Literal('blood4'), Literal('smoke'), 
   Literal('paint1'), Literal('paint2'), Literal('paint3'),
   Literal('snelk1'), Literal('snelk2'), Literal('snelk3'), Literal('snelk4'), Literal('snelk5'), Literal('snelk6'),
-  Literal('stitches'), Literal('fungus'))),
+  Literal('stitches'), Literal('fungus'), Literal('child'))),
   temple: Temple,
   terrain: Boolean,
   terrainLayout: Boolean,
@@ -72,6 +72,7 @@ const ApiCard = RRecord({
   snelk6: Boolean,
   stitches: Boolean,
   fungus: Boolean,
+  child: Boolean,
   hidePowerAndHealth: Boolean,
   snelk: Boolean,
   portrait: Union(
@@ -136,6 +137,7 @@ const templateApiCard: ApiCard = {
   enhanced: false,
   redEmission: false,
   smoke: false,
+  child: false,
   hidePowerAndHealth: false,
   snelk: false,
 }
@@ -245,6 +247,7 @@ function convertApiDataToCard(input: ApiCard): Card {
       snelk6: input.snelk6,
       stitches: input.stitches,
       fungus: input.fungus,
+      child: input.child,
       hidePowerAndHealth: input.hidePowerAndHealth,
       snelk: input.snelk,
     },
