@@ -60,14 +60,16 @@ class LeshyCardGenerator extends BaseCardGenerator<Options> {
     if (card.portrait?.type) {
       switch (card.portrait?.type) {
         case 'resource': {
-          im.resource(this.resource.get('portrait', card.portrait.resourceId))
+          // TODO: remove .toLowerCase() and determine why trying to generate Stoat gets us "Stoat" instead of "stoat"
+          im.resource(this.resource.get('portrait', card.portrait.resourceId.toLowerCase()))
             .gravity('Center')
             .geometry(1, -15)
             .composite()
           break
         }
         case 'creature': {
-          im.resource(this.resource.get('portrait', card.portrait.id))
+          // TODO: remove .toLowerCase() and determine why trying to generate Stoat gets us "Stoat" instead of "stoat"
+          im.resource(this.resource.get('portrait', card.portrait.id.toLowerCase()))
             .gravity('Center')
             .geometry(1, -15)
             .composite()
@@ -104,6 +106,16 @@ class LeshyCardGenerator extends BaseCardGenerator<Options> {
           break
         }
       }
+    }
+
+    // Long Elk:
+    if (card.flags.snelk){
+      const snelkPath = this.resource.get('decal', 'snelk')
+      im.parens(
+        IM(snelkPath)
+      ).gravity('Center')
+        .geometry(1, 0)
+        .composite()
     }
 
     // resize
@@ -320,7 +332,67 @@ class LeshyCardGenerator extends BaseCardGenerator<Options> {
     const decals: string[] = []
     // special case, as combined cards have multiple decals
     if (card.flags.fused) {
-      decals.push('fungus', 'blood', 'stitches')
+      decals.push('fungus', 'blood2', 'stitches')
+    }
+
+    if (card.flags.fungus) {
+      decals.push('fungus')
+    }
+
+    if (card.flags.stitches) {
+      decals.push('stitches')
+    }
+
+    if (card.flags.snelk1) {
+      decals.push('snelk1')
+    }
+
+    if (card.flags.snelk2) {
+      decals.push('snelk2')
+    }
+
+    if (card.flags.snelk3) {
+      decals.push('snelk3')
+    }
+
+    if (card.flags.snelk4) {
+      decals.push('snelk4')
+    }
+
+    if (card.flags.snelk5) {
+      decals.push('snelk5')
+    }
+
+    if (card.flags.snelk6) {
+      decals.push('snelk6')
+    }
+
+    if (card.flags.paint2) {
+      decals.push('paint2')
+    }
+
+    if (card.flags.paint3) {
+      decals.push('paint3')
+    }
+
+    if (card.flags.blood4) {
+      decals.push('blood4')
+    }
+
+    if (card.flags.blood1) {
+      decals.push('blood1')
+    }
+
+    if (card.flags.blood2) {
+      decals.push('blood2')
+    }
+
+    if (card.flags.blood3) {
+      decals.push('blood3')
+    }
+
+    if (card.flags.paint1) {
+      decals.push('paint1')
     }
 
     if (card.flags.smoke) {
@@ -866,6 +938,7 @@ const act1ResourceMap = {
     'skink_tail': 'portraits/leshy/skink_tail.png',
     'skink_tailless': 'portraits/leshy/skink_tailless.png',
     'skunk': 'portraits/leshy/skunk.png',
+    'snelk': 'portraits/leshy/snelk.png',
     'smoke': 'portraits/leshy/smoke.png',
     'smoke_improved': 'portraits/leshy/smoke_improved.png',
     'sparrow': 'portraits/leshy/sparrow.png',
@@ -1056,9 +1129,20 @@ const act1ResourceMap = {
     'smoke': 'decals/smoke.png',
     'smoke_abilityhole': 'decals/smoke_abilityhole.png',
     'stitches': 'decals/stitches.png',
-    'blood': 'decals/blood.png',
+    'blood1': 'decals/blood1.png',
+    'blood2': 'decals/blood2.png',
+    'blood3': 'decals/blood3.png',
+    'blood4': 'decals/blood4.png',
     'fungus': 'decals/fungus.png',
-    'paint': 'decals/paint_1.png',
+    'paint1': 'decals/paint1.png',
+    'paint2': 'decals/paint2.png',
+    'paint3': 'decals/paint3.png',
+    'snelk1': 'decals/snelk1.png',
+    'snelk2': 'decals/snelk2.png',
+    'snelk3': 'decals/snelk3.png',
+    'snelk4': 'decals/snelk4.png',
+    'snelk5': 'decals/snelk5.png',
+    'snelk6': 'decals/snelk6.png',
   }
 } as const
 
