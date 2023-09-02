@@ -59,6 +59,9 @@ const Sigil = Union(
   Literal('doublestrike'), // DoubleStrike
   Literal('bonedigger'), // BoneDigger
   Literal('evolve'), // Evolve
+  Literal('evolve_1'), // Evolve1
+  Literal('evolve_2'), // Evolve2
+  Literal('evolve_3'), // Evolve3
   Literal('gaingemblue'), // GainGemBlue
   Literal('gaingemgreen'), // GainGemGreen
   Literal('gaingemorange'), // GainGemOrange
@@ -299,6 +302,7 @@ const CreatureId = Union(
   Literal('moxsapphire'),
   Literal('moxtriple'),
   Literal('mudturtle'),
+  Literal('mudturtle_shelled'),
   Literal('mule'),
   Literal('mummy'),
   Literal('mummy_telegrapher'),

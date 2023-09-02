@@ -56,7 +56,6 @@ const CreatureId = Union(
   Literal('BlueMage'),
   Literal('BlueMage_Fused'),
   Literal('BlueMage_Talking'),
-  Literal('BrokenEgg'),
   Literal('BoltHound'),
   Literal('BombMaiden'),
   Literal('Bombbot'),
@@ -183,6 +182,7 @@ const CreatureId = Union(
   Literal('MoxSapphire'),
   Literal('MoxTriple'),
   Literal('MudTurtle'),
+  Literal('MudTurtleShelled'),
   Literal('Mule'),
   Literal('Mummy'),
   Literal('Mummy_Telegrapher'),
@@ -429,6 +429,9 @@ const Abililty = Union(
   Literal('DoubleStrike'),
   Literal('BoneDigger'),
   Literal('Evolve'),
+  Literal('Evolve1'),
+  Literal('Evolve2'),
+  Literal('Evolve3'),
   Literal('GainGemBlue'),
   Literal('GainGemGreen'),
   Literal('GainGemOrange'),
@@ -809,7 +812,6 @@ function convertJldrCard(jsonCard: JldrCreature): Card {
     case 'BlueMage': card.portrait = { type: 'creature', id: 'bluemage' }; break
     case 'BlueMage_Fused': card.portrait = { type: 'creature', id: 'bluemage_fused' }; break
     case 'BlueMage_Talking': card.portrait = { type: 'creature', id: 'bluemage_talking' }; break
-    case 'BrokenEgg': card.portrait = { type: 'creature', id: 'brokenegg' }; break
     case 'BoltHound': card.portrait = { type: 'creature', id: 'bolthound' }; break
     case 'BombMaiden': card.portrait = { type: 'creature', id: 'bombmaiden' }; break
     case 'Bombbot': card.portrait = { type: 'creature', id: 'bombbot' }; break
@@ -936,6 +938,7 @@ function convertJldrCard(jsonCard: JldrCreature): Card {
     case 'MoxSapphire': card.portrait = { type: 'creature', id: 'moxsapphire' }; break
     case 'MoxTriple': card.portrait = { type: 'creature', id: 'moxtriple' }; break
     case 'MudTurtle': card.portrait = { type: 'creature', id: 'mudturtle' }; break
+    case 'MudTurtleShelled': card.portrait = { type: 'creature', id: 'mudturtle_shelled' }; break
     case 'Mule': card.portrait = { type: 'creature', id: 'mule' }; break
     case 'Mummy': card.portrait = { type: 'creature', id: 'mummy' }; break
     case 'Mummy_Telegrapher': card.portrait = { type: 'creature', id: 'mummy_telegrapher' }; break
@@ -1259,6 +1262,9 @@ export function convert(card: Card, id: string): Partial<JldrCreature> {
         case 'doublestrike': return 'DoubleStrike'
         case 'bonedigger': return 'BoneDigger'
         case 'evolve': return 'Evolve'
+        case 'evolve_1': return 'Evolve1'
+        case 'evolve_2': return 'Evolve2'
+        case 'evolve_3': return 'Evolve3'
         case 'gaingemblue': return 'GainGemBlue'
         case 'gaingemgreen': return 'GainGemGreen'
         case 'gaingemorange': return 'GainGemOrange'

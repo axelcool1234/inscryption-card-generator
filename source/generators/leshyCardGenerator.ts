@@ -108,15 +108,7 @@ class LeshyCardGenerator extends BaseCardGenerator<Options> {
       }
     }
 
-    // Long Elk:
-    if (card.flags.snelk){
-      const snelkPath = this.resource.get('decal', 'snelk')
-      im.parens(
-        IM(snelkPath)
-      ).gravity('Center')
-        .geometry(1, 0)
-        .composite()
-    }
+    
 
     // resize
     im.resize(undefined, fullsizeCardHeight) // 1050 pixels @ 300dpi = 3.5 inches
@@ -309,7 +301,6 @@ class LeshyCardGenerator extends BaseCardGenerator<Options> {
 
     // Temporarily moved here. Move back to next comment later.
     if (card.flags.enhanced && card.portrait?.type === 'resource') {
-      console.log(card.portrait.resourceId)
       if (this.resource.has('emission', card.portrait.resourceId)) {
         const emissionPath = this.resource.get('emission', card.portrait.resourceId)
 
@@ -327,6 +318,27 @@ class LeshyCardGenerator extends BaseCardGenerator<Options> {
         }
       }
     }
+
+    // Red Emission hack (move with temporarily moved selection above if you do end up moving it)
+    // Commented out for now: Cannot find the right RGB for the red emission.
+    // if (card.flags.redEmission && card.portrait?.type === 'resource') {
+    //   if (this.resource.has('emission', card.portrait.resourceId)) {
+    //     const emissionPath = this.resource.get('emission', card.portrait.resourceId)
+
+    //     for (const i of [false, true]) {
+    //       const emission = IM(emissionPath)
+    //         .command('-fill', 'rgb(247, 161, 161)', '-colorize', '100').resizeExt(g => g.scale(scale * 100))
+    //         .gravity('Center')
+    //         .geometry(3, -15 * scale)
+
+    //       if (i === true) {
+    //         emission.command('-blur', '0x10')
+    //       }
+
+    //       im.parens(emission).composite()
+    //     }
+    //   }
+    // }
 
     if (card.flags.golden) {
       im.parens(
@@ -348,6 +360,17 @@ class LeshyCardGenerator extends BaseCardGenerator<Options> {
           ).compose('Overlay').composite()
         }
       }
+    }
+
+    // Long Elk Decal:
+    if (card.flags.snelk){
+      const snelkPath = this.resource.get('decal', 'snelk')
+      im.parens(
+        IM(snelkPath)
+      ).resize(undefined, fullsizeCardHeight)
+        .gravity('Center')
+        .geometry(1, 0)
+        .composite()
     }
 
     const decals: string[] = []

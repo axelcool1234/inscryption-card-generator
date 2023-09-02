@@ -783,6 +783,8 @@ function resourceIdFromCreatureId(creatureId: CreatureId): string {
     case 'Mothman_Stage1': return 'mothman_1'
     case 'Mothman_Stage2': return 'mothman_2'
     case 'Mothman_Stage3': return 'mothman_3'
+    case 'MudTurtle': return 'mudturtle'
+    case 'MudTurtleShelled': return 'mudturtle_shelled'
     case 'Mule': return 'mule'
     case 'Opossum': return 'opossum'
     case 'Otter': return 'otter'
